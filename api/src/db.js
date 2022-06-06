@@ -34,11 +34,11 @@ const { Pokemon, Type } = sequelize.models;
 
 // Aca vendrian las relaciones
 Pokemon.belongsToMany(Type,{
-  through: "PokemonType"
+  through: "pokemontype"
 })
 
 Type.belongsToMany(Pokemon,{
-  through: "PokemonType" 
+  through: "pokemontype" 
 })
 
 module.exports = {

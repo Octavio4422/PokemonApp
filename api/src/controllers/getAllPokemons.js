@@ -34,16 +34,16 @@ async function getPokemons() {
     const api = await apiPokemons();
     const db = await dbPokemons();
     const response = [...api, ...db];
-    
-    response.sort((a, b) => {
-      if (a.name.toLowerCase() < b.name.toLowerCase()) {
-        return -1;
-      }
-      if (a.name.toLowerCase() > b.name.toLowerCase()) {
-        return 1;
-      }
-      return 0;
-    });
+
+    // response.sort((a, b) => {
+    //   if (a.name.toLowerCase() < b.name.toLowerCase()) {
+    //     return -1;
+    //   }
+    //   if (a.name.toLowerCase() > b.name.toLowerCase()) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
 
     return response;
   } catch (e) {

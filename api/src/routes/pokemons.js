@@ -4,9 +4,8 @@ const router = Router();
 const { getPokemons } = require("../controllers/getAllPokemons");
 const { idPokemons } = require("../controllers/getIdPokemons");
 const { queryPokemons } = require("../controllers/getQueryPokemons");
+const { createPokemon } = require("../controllers/postPokemon");
 
-
-//Para all y query
 router.get("/", (req, res, next) => {
   const { name } = req.query;
 
@@ -32,6 +31,15 @@ router.get("/:id", (req, res, next) => {
 
 });
 
-router.post("/", (req, res, next) => {});
+router.post("/", (req, res, next) => {
+  const { name, image, health, attack, defense, speed, height, weight, createdInDb, types} = req.body;
+
+  createPokemon(name, image, health, attack, defense, speed, height, weight, createdInDb, types)
+  .then((r) => res.send(r))
+  .catch((e) =>{
+    console.log(e)
+    res.status(400).send(e)})
+
+});
 
 module.exports = router;
