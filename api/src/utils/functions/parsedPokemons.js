@@ -20,6 +20,7 @@ function parsedPokemons(p, db = false) {
   }
 
   if (db) {
+    p = p.toJSON();
     const objResponse = {
       id: p.id,
       name: p.name,

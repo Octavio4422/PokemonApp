@@ -1,24 +1,37 @@
 const { Router } = require("express");
 const router = Router();
-const { getPokemons } = require('../controllers/getAllPokemons')
+
+const { getPokemons } = require("../controllers/getAllPokemons");
+const { idPokemons } = require("../controllers/getIdPokemons");
+const { queryPokemons } = require("../controllers/getQueryPokemons");
+
 
 //Para all y query
 router.get("/", (req, res, next) => {
-    const {name} = req.query;
+  const { name } = req.query;
 
-    if(!name){
-        getPokemons()
-        .then((r) => res.send(r))
-        .catch((e) => res.status(400).send(e))
-    }
+  if (!name) {
+    getPokemons()
+      .then((r) => res.send(r))
+      .catch((e) => res.status(400).send(e));
+  }
 
-    if(name){}
-})
+  if (name) {
+    queryPokemons(name)
+    .then((r) => res.send(r))
+    .catch((e) => res.status(404).send(e))
+  }
+});
 
 router.get("/:id", (req, res, next) => {
-    const {id} = req.params
-})
+  const { id } = req.params;
 
-router.post("/",(req,res,next) => {})
+  idPokemons( id )
+  .then((p) => res.send(p))
+  .catch((e) => res.status(404).send(e))
 
-module.exports = router
+});
+
+router.post("/", (req, res, next) => {});
+
+module.exports = router;
