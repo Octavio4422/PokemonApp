@@ -19,21 +19,22 @@ async function apiPokemon(id) {
 }
 
 async function dbPokemon(id) {
-  const fixedId = id.trim();
+  try {
+    const fixedId = id.trim();
 
-  const initialRequest = await Pokemon.findAll({ include: Type });
-  const pokemons = initialRequest.map((p) => parsedPokemons(p, true));
+    const initialRequest = await Pokemon.findByPk(fixedId, { include: Type });
+    const pokemon = parsedPokemons(initialRequest, true);
 
-  const response = pokemons.find((p) => p.id === fixedId )
+    if (pokemon === null) return false;
 
-  if (response === undefined) return false;
-
-  return response;
+    return pokemon;
+  } catch (e) {
+    console.error(e.message);
+  }
 }
 
 async function idPokemons(id) {
-  
-  if (id > 0 && id < 40) {
+  if (id > 0 && id <= 40) {
     const api = await apiPokemon(id);
     if (api) return api;
   }

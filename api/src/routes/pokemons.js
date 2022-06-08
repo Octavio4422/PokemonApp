@@ -17,29 +17,47 @@ router.get("/", (req, res, next) => {
 
   if (name) {
     queryPokemons(name)
-    .then((r) => res.send(r))
-    .catch((e) => res.status(404).send(e))
+      .then((r) => res.send(r))
+      .catch((e) => res.status(404).send(e));
   }
 });
 
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
 
-  idPokemons( id )
-  .then((p) => res.send(p))
-  .catch((e) => res.status(404).send(e))
-
+  idPokemons(id)
+    .then((p) => res.send(p))
+    .catch((e) => res.status(404).send(e));
 });
 
 router.post("/", (req, res, next) => {
-  const { name, image, health, attack, defense, speed, height, weight, createdInDb, types} = req.body;
+  const {
+    name,
+    image,
+    health,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
+    createdInDb,
+    types,
+  } = req.body;
 
-  createPokemon(name, image, health, attack, defense, speed, height, weight, createdInDb, types)
-  .then((r) => res.send(r))
-  .catch((e) =>{
-    console.log(e)
-    res.status(400).send(e)})
-
+  createPokemon(
+    name,
+    image,
+    health,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
+    createdInDb,
+    types
+  )
+    .then((r) => res.send(r))
+    .catch((e) => res.status(406).send(e));
 });
 
 module.exports = router;

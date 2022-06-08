@@ -32,8 +32,10 @@ function parsedPokemons(p, db = false) {
       weight: p.weight,
       image: p.image,
       types:
-        p.type.length > 1 ? [p.type[0].name, p.type[1].name] : p.type[0].name,
-      created: p.createInDb,
+        p.types.length > 1
+          ? [p.types[0].name, p.types[1].name]
+          : p.types[0].name,
+      created: db,
     };
     return objResponse;
   }

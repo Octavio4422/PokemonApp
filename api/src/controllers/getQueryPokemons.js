@@ -22,17 +22,17 @@ async function apiPokemon(name) {
 async function dbPokemon(name) {
   const fixedname = name.trim().toLowerCase();
 
-  const initialRequest = await Pokemon.findOne(
-    {
-      where: { name: { [Op.like]: fixedname }, },
+  const initialRequest = await Pokemon.findOne({
+    where: {
+      name: {
+        [Op.like]: fixedname,
+      },
     },
-    {
-      include: Type,
-    }
-  );
+    include: Type,
+  });
 
-  if (initialRequest === null) return false;
-  
+  if (!initialRequest) return false;
+
   const response = parsedPokemons(initialRequest, true);
   return response;
 }

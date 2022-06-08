@@ -21,6 +21,7 @@ async function apiPokemons() {
 async function dbPokemons() {
   try {
     const initialRequest = await Pokemon.findAll({ include: Type });
+    if (initialRequest === undefined) return;
     const response = initialRequest.map((dbp) => parsedPokemons(dbp, true));
     return response;
   } catch (e) {
@@ -33,22 +34,13 @@ async function getPokemons() {
   try {
     const api = await apiPokemons();
     const db = await dbPokemons();
-    const response = [...api, ...db];
 
-    // response.sort((a, b) => {
-    //   if (a.name.toLowerCase() < b.name.toLowerCase()) {
-    //     return -1;
-    //   }
-    //   if (a.name.toLowerCase() > b.name.toLowerCase()) {
-    //     return 1;
-    //   }
-    //   return 0;
-    // });
+    const response = [...api, ...db];
 
     return response;
   } catch (e) {
     console.error(`Error in getPokemons: ${e.message}`);
-    return e;
+    throw e;
   }
 }
 

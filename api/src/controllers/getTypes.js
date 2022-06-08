@@ -20,7 +20,7 @@ async function typesToDb() {
     return response;
   } catch (e) {
     console.error(`Error in typesToDataBase: ${e.message}`)
-    return e
+    throw e
   }
 }
 
