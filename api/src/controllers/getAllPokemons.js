@@ -14,7 +14,7 @@ async function apiPokemons() {
     return pokemons;
   } catch (e) {
     console.error(`Error in apiPokemons: ${e.message}`);
-    return e;
+    throw e;
   }
 }
 
