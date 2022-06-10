@@ -1,12 +1,14 @@
+import axios from "axios"
 import { LOCAL_API_POKEMONS, LOCAL_API_TYPES } from "../../Utils/globals";
 
 export const ALL_POKEMONS = "ALL_POKEMONS";
 export const ID_POKEMONS = "ID_POKEMONS";
 export const QUERY_POKEMONS = "QUERY_POKEMONS";
 export const ALL_TYPES = "ALL_TYPES";
+export const ERROR_MESSAGE = "ERROR_MESSAGE";
 
 export const allPokemons = () => (dispatch) => {
-  return axios.get(LOCAL_API_POKEMONS)
+    return axios.get(LOCAL_API_POKEMONS)
     .then((pokemons) => {
       dispatch({
         type: ALL_POKEMONS,
@@ -68,3 +70,9 @@ export const allTypes = () => (dispatch) => {
       });
     });
 };
+
+// export const createPokemons = (data) => (dispatch) => {
+//     return axios.post(LOCAL_API_POKEMONS, data)
+//     .then()
+//     .catch()
+// }
