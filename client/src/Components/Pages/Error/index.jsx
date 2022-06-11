@@ -12,7 +12,7 @@ export default function Error() {
 
   return (
     <div>
-      <h1>Oh Oh, the team Rocket did it again</h1>
+      <h1>Oh No, the team Rocket did it again</h1>
       <img
         src="https://www.pngkey.com/png/detail/224-2246263_team-rocket-pokemon-team-rocket-png.png"
         alt="Team Rocktet"

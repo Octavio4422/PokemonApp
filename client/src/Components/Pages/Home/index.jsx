@@ -36,6 +36,7 @@ export default function Home() {
   const currentCard = pokemons.slice(indecOfFirstCard, indexOfLastCard);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const resetPage = () => setCurrentPage(1);
 
   return (
     <>
@@ -43,13 +44,14 @@ export default function Home() {
         <Header />
         <div>
           <div>
+            <Filters loading={loading} resetPage={resetPage} />
             <Pagination
+              loading={loading}
               currentPage={currentPage}
               cardsPerPage={cardsPerPage}
               totalCards={pokemons.length}
               paginate={paginate}
             />
-            <Filters />
             <Pokemons pokemons={currentCard} loading={loading} />
           </div>
         </div>

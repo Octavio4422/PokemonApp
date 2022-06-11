@@ -1,3 +1,4 @@
+import filter from "../../Utils/Functions/filter";
 import order from "../../Utils/Functions/order";
 import {
   ALL_POKEMONS,
@@ -7,16 +8,19 @@ import {
   ERROR_MESSAGE,
   CLEAR_ERROR,
   ORDER,
+  FITLER,
+  EMPTY_INPUT,
 } from "../actions/index";
 
 const initialState = {
   originalPokemons: [],
   pokemons: [],
   pokemon: {},
-  types: {},
+  types: [],
   error: false,
-  queryError: "",
 };
+
+let lastOrder = "";
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -37,7 +41,6 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         pokemons: payload,
-        queryError: "",
       };
 
     case ALL_TYPES:
@@ -68,12 +71,33 @@ function rootReducer(state = initialState, { type, payload }) {
           pokemons: [...state.pokemons],
         };
       }
+      lastOrder = payload;
       return {
         ...state,
         pokemons: [...newOrder],
       };
 
-    default:
+    case FITLER:
+      let newFilter = [...state.originalPokemons];
+      newFilter = filter(newFilter, payload, lastOrder);
+      if (payload === "") {
+        return {
+          ...state,
+          pokemons: [...state.pokemons],
+        };
+      }
+      return {
+        ...state,
+        pokemons: [...newFilter],
+      };
+
+      case EMPTY_INPUT:
+        return{
+          ...state,
+          pokemons: [...state.originalPokemons]
+        }
+
+      default:
       return { ...state };
   }
 }

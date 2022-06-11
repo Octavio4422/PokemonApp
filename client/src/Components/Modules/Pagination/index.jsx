@@ -1,4 +1,5 @@
 export default function Pagination({
+  loading,
   currentPage,
   cardsPerPage,
   totalCards,
@@ -9,6 +10,8 @@ export default function Pagination({
   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  if (loading) return <></>;
 
   return (
     <nav>

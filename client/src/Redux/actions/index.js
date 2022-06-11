@@ -8,6 +8,8 @@ export const ALL_TYPES = "ALL_TYPES";
 export const ERROR_MESSAGE = "ERROR_MESSAGE";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ORDER = "ORDER";
+export const FITLER = "FILTER";
+export const EMPTY_INPUT = "EMPTY_INPUT"
 
 export const allPokemons = () => (dispatch) => {
     return axios.get(LOCAL_API_POKEMONS)
@@ -43,34 +45,34 @@ export const idPokemons = (id) => (dispatch) => {
 
 export const queryPokemons = (query) => (dispatch) => {
   return axios.get(`${LOCAL_API_POKEMONS}?name=${query}`)
-    .then((pokemons) => {
-      dispatch({
-        type: QUERY_POKEMONS,
-        payload: pokemons.data,
-      });
+  .then((pokemon) => {
+    dispatch({
+      type: QUERY_POKEMONS,
+      payload:[pokemon.data]
     })
-    .catch((e) => {
-      dispatch({
-        type: ERROR_MESSAGE,
-        payload: e.response.data,
-      });
-    });
+  })
+  .catch((e) => {
+    dispatch({
+      type:QUERY_POKEMONS,
+      payload: []
+    })
+  })
 };
 
 export const allTypes = () => (dispatch) => {
   return axios.get(LOCAL_API_TYPES)
-    .then((types) => {
-      dispatch({
-        type: ALL_TYPES,
-        payload: types.data,
-      });
+  .then((types) => {
+    dispatch({
+      type: ALL_TYPES,
+      payload: types.data
     })
-    .cath((e) => {
-      dispatch({
-        type: ERROR_MESSAGE,
-        payload: e.response.data,
-      });
-    });
+  })
+  .catch((e) => {
+    dispatch({
+      type: ERROR_MESSAGE,
+      payload: e.response.data
+    })
+  })
 };
 
 // export const createPokemons = (data) => (dispatch) => {
@@ -90,5 +92,18 @@ export const allTypes = () => (dispatch) => {
     return  {
       type: ORDER,
       payload: value,
+    }
+  }
+
+  export const filterPokemons = (value) => {
+    return {
+      type: FITLER,
+      payload:value,
+    }
+  }
+
+  export const emptyInput = () => {
+    return{
+      type: EMPTY_INPUT
     }
   }
