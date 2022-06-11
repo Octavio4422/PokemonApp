@@ -6,6 +6,8 @@ export const ID_POKEMONS = "ID_POKEMONS";
 export const QUERY_POKEMONS = "QUERY_POKEMONS";
 export const ALL_TYPES = "ALL_TYPES";
 export const ERROR_MESSAGE = "ERROR_MESSAGE";
+export const CLEAR_ERROR = "CLEAR_ERROR";
+export const ORDER = "ORDER";
 
 export const allPokemons = () => (dispatch) => {
     return axios.get(LOCAL_API_POKEMONS)
@@ -18,7 +20,7 @@ export const allPokemons = () => (dispatch) => {
     .catch((e) => {
       dispatch({
         type: ERROR_MESSAGE,
-        payload: e.response.data,
+        payload: true,
       });
     });
 };
@@ -34,7 +36,7 @@ export const idPokemons = (id) => (dispatch) => {
     .catch((e) => {
       dispatch({
         type: ERROR_MESSAGE,
-        payload: e.response.data,
+        payload: true,
       });
     });
 };
@@ -72,7 +74,21 @@ export const allTypes = () => (dispatch) => {
 };
 
 // export const createPokemons = (data) => (dispatch) => {
-//     return axios.post(LOCAL_API_POKEMONS, data)
-//     .then()
-//     .catch()
-// }
+  //     return axios.post(LOCAL_API_POKEMONS, data)
+  //     .then()
+  //     .catch()
+  // }
+  
+  
+  export const clearError = () => {
+    return {
+      type: CLEAR_ERROR
+    }
+  }
+
+  export const orderPokemons = (value) => {
+    return  {
+      type: ORDER,
+      payload: value,
+    }
+  }

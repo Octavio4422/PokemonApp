@@ -1,3 +1,4 @@
+import Pokemon from "../PokemonCard"
 
 
 export default function Pokemons({pokemons, loading}){
@@ -7,6 +8,19 @@ export default function Pokemons({pokemons, loading}){
     }
     
     return <>
-        <h1>Hola</h1>
+        {pokemons && pokemons.map((p) => {
+            return <Pokemon
+                key={p.id}
+                id={p.id}
+                name={p.name}
+                attack={p.attack}
+                defense={p.defense}
+                speed={p.speed}
+                height={p.height}
+                weight={p.weight}
+                img={p.image}
+                types={p.types}
+            />
+        })}
     </>
 }
