@@ -17,7 +17,7 @@ function App() {
           <Route exact path={"/pokemons"} element={<Home />} />
           <Route exact path={"/pokemon/:id"} element={<PokemonDetail />} />
           <Route exact path={"/pokemon/create"} element={<CreatePokemon />} />
-          <Route exact path={"/error"} element={<Error/>} />
+          <Route exact path={"*"} element={<Error/>} />
         </Routes>
       </BrowserRouter>
     </div>

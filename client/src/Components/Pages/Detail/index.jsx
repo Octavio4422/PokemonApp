@@ -19,7 +19,7 @@ export default function PokemonDetail({}) {
 
   useEffect(() => {
     if (error) {
-      navigate("/error");
+      navigate("*");
     }
   });
 

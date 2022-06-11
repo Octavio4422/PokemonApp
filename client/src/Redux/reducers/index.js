@@ -10,12 +10,14 @@ import {
   ORDER,
   FITLER,
   EMPTY_INPUT,
+  CREATE_POKEMONS,
 } from "../actions/index";
 
 const initialState = {
   originalPokemons: [],
   pokemons: [],
   pokemon: {},
+  created: [],
   types: [],
   error: false,
 };
@@ -41,6 +43,12 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         pokemons: payload,
+      };
+
+    case CREATE_POKEMONS:
+      return {
+        ...state,
+        created: [...created, payload],
       };
 
     case ALL_TYPES:
@@ -91,13 +99,13 @@ function rootReducer(state = initialState, { type, payload }) {
         pokemons: [...newFilter],
       };
 
-      case EMPTY_INPUT:
-        return{
-          ...state,
-          pokemons: [...state.originalPokemons]
-        }
+    case EMPTY_INPUT:
+      return {
+        ...state,
+        pokemons: [...state.originalPokemons],
+      };
 
-      default:
+    default:
       return { ...state };
   }
 }
