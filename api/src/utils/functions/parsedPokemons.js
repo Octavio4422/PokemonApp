@@ -13,7 +13,7 @@ function parsedPokemons(p, db = false) {
       types:
         p.types.length > 1
           ? [p.types[0].type.name, p.types[1].type.name]
-          : p.types[0].type.name,
+          :[ p.types[0].type.name],
       created: false,
     };
     return objResponse;
@@ -34,7 +34,7 @@ function parsedPokemons(p, db = false) {
       types:
         p.types.length > 1
           ? [p.types[0].name, p.types[1].name]
-          : p.types[0].name,
+          :[p.types[0].name],
       created: db,
     };
     return objResponse;
