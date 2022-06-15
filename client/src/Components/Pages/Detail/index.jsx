@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 import Pokemon from "../../Modules/PokemonCard";
 import { idPokemons } from "../../../Redux/actions";
+import Header from "../../Sections/Header";
+import Footer from "../../Sections/Footer";
 
 export default function PokemonDetail({}) {
   const dispatch = useDispatch();
@@ -25,17 +27,21 @@ export default function PokemonDetail({}) {
 
   return (
     <>
-      <Pokemon
-      detail={true}
-      name={pokemon.name}
-      img={pokemon.image}
-      types={pokemon.types}
-      attack={pokemon.attack}
-      defense={pokemon.defense}
-      speed={pokemon.speed}
-      height={pokemon.height}
-      weight={pokemon.weight}
-       />
+      <Header />
+      <div>
+        <Pokemon
+          detail={true}
+          name={pokemon.name}
+          img={pokemon.image}
+          types={pokemon.types}
+          attack={pokemon.attack}
+          defense={pokemon.defense}
+          speed={pokemon.speed}
+          height={pokemon.height}
+          weight={pokemon.weight}
+        />
+      </div>
+      <Footer />
     </>
   );
 }

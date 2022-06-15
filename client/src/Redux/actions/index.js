@@ -6,11 +6,12 @@ export const ID_POKEMONS = "ID_POKEMONS";
 export const QUERY_POKEMONS = "QUERY_POKEMONS";
 export const CREATE_POKEMONS = "CREATE_POKEMONS"
 export const ALL_TYPES = "ALL_TYPES";
-export const ERROR_MESSAGE = "ERROR_MESSAGE";
-export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ORDER = "ORDER";
 export const FITLER = "FILTER";
 export const EMPTY_INPUT = "EMPTY_INPUT";
+export const ERROR_MESSAGE = "ERROR_MESSAGE";
+export const ERROR_CREATE = "ERROR_CREATE"
+export const CLEAR_ERROR = "CLEAR_ERROR";
 
 export const allPokemons = () => (dispatch) => {
   return axios
@@ -89,7 +90,10 @@ export const createPokemons = (data) => (dispatch) => {
     })
   })
   .catch((e) => {
-    console.log(e)
+    dispatch({
+      type: ERROR_CREATE,
+      payload: e.response.data,
+    })
   });
 };
 

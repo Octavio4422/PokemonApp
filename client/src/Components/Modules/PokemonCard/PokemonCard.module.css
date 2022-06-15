@@ -1,0 +1,15 @@
+.whole{
+    border: 18px solid rgb(254, 227, 24);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-decoration: none;
+}
+
+.image{
+    border: 5px solid rgb(241, 237, 228);
+    margin: 10px;
+    border-radius: 0px 0px 15px 15px;
+}

@@ -1,4 +1,5 @@
 import Pokemon from "../PokemonCard";
+import styles from "./Pokemons.module.css"
 
 export default function Pokemons({ pokemons, loading }) {
   if (loading) {
@@ -14,7 +15,8 @@ export default function Pokemons({ pokemons, loading }) {
     <>
       {!pokemons.length ? (
         <h1>Oh no! I think it´s not in my Pokedex, let´s look for another</h1>
-      ) : (
+      ) : (<div className={styles.pokemon} >
+        {
         pokemons.map((p) => {
           return (
             <Pokemon
@@ -25,7 +27,8 @@ export default function Pokemons({ pokemons, loading }) {
               types={p.types}
             />
           );
-        })
+        })}
+      </div>
       )}
     </>
   );

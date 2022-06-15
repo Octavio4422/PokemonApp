@@ -11,13 +11,15 @@ import {
   FITLER,
   EMPTY_INPUT,
   CREATE_POKEMONS,
+  ERROR_CREATE,
 } from "../actions/index";
 
 const initialState = {
   originalPokemons: [],
   pokemons: [],
   pokemon: {},
-  created: [],
+  create: [],
+  errorCreate: "",
   types: [],
   error: false,
 };
@@ -48,7 +50,8 @@ function rootReducer(state = initialState, { type, payload }) {
     case CREATE_POKEMONS:
       return {
         ...state,
-        created: [...created, payload],
+        create: [...state.create, payload],
+        errorCreate: "",
       };
 
     case ALL_TYPES:
@@ -56,18 +59,6 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         types: payload,
         error: "",
-      };
-
-    case ERROR_MESSAGE:
-      return {
-        ...state,
-        error: true,
-      };
-
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: false,
       };
 
     case ORDER:
@@ -103,6 +94,24 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         pokemons: [...state.originalPokemons],
+      };
+
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        error: true,
+      };
+
+    case ERROR_CREATE:
+      return {
+        ...state,
+        errorCreate: payload,
+      };
+
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: false,
       };
 
     default:

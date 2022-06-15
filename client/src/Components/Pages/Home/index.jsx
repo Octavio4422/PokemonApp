@@ -9,6 +9,8 @@ import Pokemons from "../../Modules/Pokemons";
 import Pagination from "../../Modules/Pagination";
 import Filters from "../../Modules/Filter&Order/AllFilters";
 
+import styles from "./Home.module.css";
+
 export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,22 +42,24 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <Header />
-        <div>
-          <div>
-            <Filters loading={loading} resetPage={resetPage} />
-            <Pagination
-              loading={loading}
-              currentPage={currentPage}
-              cardsPerPage={cardsPerPage}
-              totalCards={pokemons.length}
-              paginate={paginate}
-            />
-            <Pokemons pokemons={currentCard} loading={loading} />
-          </div>
+      <div className={styles.whole}>
+        <div className={styles.header}>
+          <Header />
         </div>
-        <Footer />
+        <div>
+          <Filters loading={loading} resetPage={resetPage} />
+          <Pagination
+            loading={loading}
+            currentPage={currentPage}
+            cardsPerPage={cardsPerPage}
+            totalCards={pokemons.length}
+            paginate={paginate}
+          />
+          <Pokemons pokemons={currentCard} loading={loading} />
+        </div>
+        <div className={styles.footer}>
+          <Footer />
+        </div>
       </div>
     </>
   );

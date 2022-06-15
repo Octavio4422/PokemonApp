@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import styles from "./Header.module.css"
 
 export default function Header(){
     return <>
-    <div>
+    <div className={styles.Header}>
       <Link to={"/pokemons"}>
         <h1>PokeApp</h1>
       </Link>
