@@ -19,10 +19,9 @@ export default function Pokemon({
   if (detail) {
     return (
       <>
-        <Header />
         <div>
           <h1>{name}</h1>
-            <img src={img} alt={name} />
+          <img src={img} alt={name} />
           <ul>
             types:
             {types &&
@@ -36,7 +35,6 @@ export default function Pokemon({
           <h3>height:{height}</h3>
           <h3>weight:{weight}</h3>
         </div>
-        <Footer />
       </>
     );
   }
@@ -46,8 +44,7 @@ export default function Pokemon({
       <Link to={`/pokemon/${id}`}>
         <div>
           <h3>{name}</h3>
-          {console.log(img)}
-          <img  className={styles.image}  src={img} alt={name} />
+          <img className={styles.image} src={img} alt={name} />
           <ul>
             {types &&
               types.map((t) => {

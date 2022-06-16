@@ -7,6 +7,8 @@ import { idPokemons } from "../../../Redux/actions";
 import Header from "../../Sections/Header";
 import Footer from "../../Sections/Footer";
 
+import styles from "./Detail.module.css";
+
 export default function PokemonDetail({}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ export default function PokemonDetail({}) {
   });
 
   return (
-    <>
+    <div className={styles.flexContainer}>
       <Header />
       <div>
         <Pokemon
@@ -42,6 +44,6 @@ export default function PokemonDetail({}) {
         />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

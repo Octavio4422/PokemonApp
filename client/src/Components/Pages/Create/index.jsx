@@ -1,12 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { allPokemons, allTypes, createPokemons } from "../../../Redux/actions";
-
+import { allTypes, createPokemons } from "../../../Redux/actions";
 import Header from "../../Sections/Header";
 import Footer from "../../Sections/Footer";
 import validation from "../../../Utils/Functions/validation";
-import typeParser from "../../../Utils/Functions/typesParser";
+import typesController from "../../../Utils/Functions/typesController";
+import styles from "./Create.module.css";
+import orderTypes from "../../../Utils/Functions/orderTypes";
+
+let resetinput = {
+  name: "",
+  image: "",
+  health: 50,
+  attack: 50,
+  defense: 50,
+  speed: 50,
+  height: 50,
+  weight: 50,
+  types: [],
+};
 
 let input = {
   name: "",
@@ -19,47 +31,54 @@ let input = {
   weight: 50,
   types: [],
 };
-export default function CreatePokemon() {
-  
-  const dispatch = useDispatch();
-  
-  let types = useSelector((state) => state.types);
-  const create = useSelector((state) => state.create);
-  const apiError = useSelector((state) => state.errorCreate);
 
-  useEffect(() => {
-    dispatch(allPokemons());
-    dispatch(allTypes());
-  }, []);
+export default function CreatePokemon() {
+  const dispatch = useDispatch();
+
+  let types = useSelector((state) => state.types);
+  types = orderTypes(types);
 
   let [error, setError] = useState({});
 
-  let handleChange = (e) => {
-    if(e.target.name === "types"){
-      input = {...input, [e.target.name]: [...input.types,e.target.value]}
-    } 
+  useEffect(() => {
+    dispatch(allTypes());
+  }, []);
 
-    input = {...input,  [e.target.name]: e.target.value}
+  let handleChange = (e) => {
+    if (e.target.name === "types") {
+      if (input.types.includes(e.target.value)) {
+        input.types = input.types.filter((t) => t !== e.target.value);
+        setError(typesController(input));
+        return;
+      }
+
+      input = { ...input, [e.target.name]: [...input.types, e.target.value] };
+      setError(typesController(input));
+      return;
+    }
+
+    input = { ...input, [e.target.name]: e.target.value };
     setError(validation(input));
-    console.log(input)
   };
 
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createPokemons(input));
+    input = resetinput;
   };
 
   return (
     <>
       <div>
         <Header />
-        <div>
-          <form>
+        <div className={styles.whole}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <label>
               Name:
               <input
                 type={"text"}
                 name={"name"}
+                value={input.name}
                 onChange={(e) => handleChange(e)}
               />
               {error.name && <p>{error.name}</p>}
@@ -70,9 +89,10 @@ export default function CreatePokemon() {
               <input
                 type={"url"}
                 name={"image"}
+                value={input.image}
                 onChange={(e) => handleChange(e)}
               />
-              {error.image && <p>{error.image}</p>}
+              {error.image ? <p></p> : <p>{error.image}</p>}
             </label>
             <p></p>
             <label>
@@ -80,9 +100,9 @@ export default function CreatePokemon() {
               <input
                 type={"number"}
                 name={"height"}
+                value={input.height}
                 min="0"
                 max="255"
-                defaultValue={50}
                 onChange={(e) => handleChange(e)}
               />
               {error.height && <p>{error.height}</p>}
@@ -93,9 +113,9 @@ export default function CreatePokemon() {
               <input
                 type={"number"}
                 name={"weight"}
+                value={input.weight}
                 min="0"
                 max="255"
-                defaultValue={50}
                 onChange={(e) => handleChange(e)}
               />
             </label>
@@ -106,6 +126,7 @@ export default function CreatePokemon() {
                 <input
                   type="range"
                   name="health"
+                  value={input.health}
                   min="0"
                   max="100"
                   step="10"
@@ -117,6 +138,7 @@ export default function CreatePokemon() {
                 <input
                   type="range"
                   name="attack"
+                  value={input.attack}
                   min="0"
                   max="100"
                   step="10"
@@ -128,6 +150,7 @@ export default function CreatePokemon() {
                 <input
                   type="range"
                   name="defense"
+                  value={input.defense}
                   min="0"
                   max="100"
                   step="10"
@@ -139,6 +162,7 @@ export default function CreatePokemon() {
                 <input
                   type="range"
                   name="speed"
+                  value={input.speed}
                   min="0"
                   max="100"
                   step="10"
@@ -148,7 +172,7 @@ export default function CreatePokemon() {
             </div>
             <div>
               <label>Types:</label>
-              <div>
+              <div className={styles.types}>
                 {types &&
                   types.map((t, i) => {
                     return (
@@ -157,16 +181,25 @@ export default function CreatePokemon() {
                           type="checkbox"
                           name="types"
                           value={t.name}
-                          id={`${t.name}-${i}`}
                           onChange={(e) => handleChange(e)}
                         />
-                        <label htmlFor={`${t.name}-${i}`}>{t.name}</label>
+                        <label>{t.name}</label>
                       </div>
                     );
                   })}
+                {error.types && <p>{error.types}</p>}
               </div>
             </div>
-            <button  disabled={Object.values(error).length} type={"submit"} onSubmit={(e) => handleSubmit(e)}>
+            <button
+              disabled={
+                Object.values(error).length ||
+                input.name === "" ||
+                input.image === "" ||
+                input.types.length > 2
+              }
+              type={"submit"}
+              onSubmit={(e) => handleSubmit(e)}
+            >
               Create Pokemon
             </button>
           </form>

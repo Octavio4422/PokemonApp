@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import { allPokemons, clearError } from "../../../Redux/actions";
 
 import Header from "../../Sections/Header";
@@ -13,23 +12,28 @@ import styles from "./Home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
+  const dataCheck = useSelector((state) => state.originalPokemons)
   const pokemons = useSelector((state) => state.pokemons);
   const error = useSelector((state) => state.error);
+  let loading = true;
 
-  const [loading, setLoading] = useState(true);
+  if (dataCheck.length > 10) {
+    loading = false;
+  }
 
   useEffect(() => {
+    if (dataCheck.length > 10) {
+      return;
+    }
     dispatch(clearError());
-    dispatch(allPokemons()).then(() => setLoading(false));
+    dispatch(allPokemons());
   }, []);
 
-  useEffect(() => {
-    if (error) {
-      navigate("*");
-    }
-  });
+  if (error) {
+    dispatch(clearError());
+    dispatch(allPokemons());
+  }
 
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 12;

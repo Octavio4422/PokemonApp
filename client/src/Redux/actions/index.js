@@ -86,7 +86,7 @@ export const createPokemons = (data) => (dispatch) => {
   .then((pokemon) => {
     dispatch({
       type:CREATE_POKEMONS,
-      payload:pokemon.data
+      payload: pokemon.data
     })
   })
   .catch((e) => {

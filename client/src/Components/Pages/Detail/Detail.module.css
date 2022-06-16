@@ -1,0 +1,6 @@
+.flexContainer{
+    background-color: blue;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+}

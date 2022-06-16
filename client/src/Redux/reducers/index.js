@@ -50,6 +50,8 @@ function rootReducer(state = initialState, { type, payload }) {
     case CREATE_POKEMONS:
       return {
         ...state,
+        originalPokemons: [...state.originalPokemons, payload.pokemon],
+        pokemons: [...state.pokemons, payload.pokemon],
         create: [...state.create, payload],
         errorCreate: "",
       };
