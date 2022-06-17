@@ -4,7 +4,7 @@ import styles from "./LandingPage.module.css"
 
 export default function LandingPage() {
   return (
-    <div  className={styles.hole}>
+    <div  className={styles.flexContainer}>
       <div>
         <Link to={"/pokemons"}>
           <button>Let's catch them</button>

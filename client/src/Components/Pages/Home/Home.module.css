@@ -1,4 +1,4 @@
-.whole{
+.flexContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.footer{
-    justify-self: end;
+.footer {
     width: 100%;
+    margin-top: 190px;
 }

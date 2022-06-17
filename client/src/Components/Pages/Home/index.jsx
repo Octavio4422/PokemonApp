@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <>
-      <div className={styles.whole}>
+      <div className={styles.flexContainer}>
         <div className={styles.header}>
           <Header />
         </div>

@@ -204,7 +204,9 @@ export default function CreatePokemon() {
             </button>
           </form>
         </div>
+        <div className={styles.footer} > 
         <Footer />
+        </div>
       </div>
     </>
   );

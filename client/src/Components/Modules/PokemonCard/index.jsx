@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import Footer from "../../Sections/Footer";
-import Header from "../../Sections/Header";
-
 import styles from "./PokemonCard.module.css";
 
 export default function Pokemon({
@@ -19,21 +16,25 @@ export default function Pokemon({
   if (detail) {
     return (
       <>
-        <div>
-          <h1>{name}</h1>
-          <img src={img} alt={name} />
-          <ul>
-            types:
-            {types &&
-              types.map((t) => {
-                return <h4 key={t}>{t}</h4>;
-              })}
-          </ul>
-          <h3>attack:{attack}</h3>
-          <h3>defense:{defense}</h3>
-          <h3>speed:{speed}</h3>
-          <h3>height:{height}</h3>
-          <h3>weight:{weight}</h3>
+        <div className={styles.card}>
+          <div>
+            <h1>{name}</h1>
+            <img src={img} alt={name} />
+          </div>
+          <div>
+            <h3>attack:{attack}</h3>
+            <h3>defense:{defense}</h3>
+            <h3>speed:{speed}</h3>
+            <h3>height:{height}</h3>
+            <h3>weight:{weight}</h3>
+            <ul>
+              <h3>Types:</h3>
+              {types &&
+                types.map((t) => {
+                  return <h4 key={t}>{t}</h4>;
+                })}
+            </ul>
+          </div>
         </div>
       </>
     );

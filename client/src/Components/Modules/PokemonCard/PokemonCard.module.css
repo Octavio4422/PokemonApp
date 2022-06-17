@@ -1,9 +1,16 @@
-/* .whole{
+.card{
+    background-color: aqua;
     border: 18px solid rgb(254, 227, 24);
     border-radius: 15px;
+    width: 40%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    margin: 20px;
+  }
+
+.whole{
+    border: 18px solid rgb(254, 227, 24);
+    border-radius: 15px;
     background-color: white;
     text-decoration: none;
 }
@@ -12,4 +19,4 @@
     border: 5px solid rgb(241, 237, 228);
     margin: 10px;
     border-radius: 0px 0px 15px 15px;
-} */
+}

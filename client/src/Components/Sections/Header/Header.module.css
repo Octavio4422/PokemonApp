@@ -1,16 +1,11 @@
 .header{
-    padding: 50px;
+    padding: 40px;
     background-color: rgb(255,28,28);
     text-align: center;
 }
 
 .nav{
-    background-color: aqua;
     width: 60%;
     /* display: flex;
     flex-direction: row; */
-}
-
-.links{
-    text-decoration: none;
 }

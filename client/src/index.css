@@ -1,6 +1,6 @@
 body {
-  padding: 0px;
   margin: 0px;
+  min-height: 100vh;
   background-image: url(./pokemon-background2.jpg); 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
